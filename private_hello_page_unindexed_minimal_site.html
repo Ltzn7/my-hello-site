@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>hello</title>
+  
+  <!-- 让搜索引擎不要收录 -->
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <meta name="googlebot" content="noindex, nofollow, noarchive" />
+  
+  <style>
+    html, body { height: 100%; margin: 0; }
+    body {
+      display: grid; place-items: center;
+      background: conic-gradient(from 180deg at 50% 50%, #6ee7ff, #c084fc, #f472b6, #fca5a5, #fde047, #6ee7ff);
+      background-size: 180% 180%;
+      animation: float 10s ease-in-out infinite;
+      overflow: hidden;
+    }
+    @keyframes float {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    a#hello {
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans SC", "PingFang SC", "Hiragino Sans GB";
+      font-size: clamp(48px, 10vw, 120px);
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      color: #fff;
+      text-decoration: none;
+      padding: .25em .5em;
+      border-radius: 24px;
+      backdrop-filter: blur(8px);
+      background: rgba(0,0,0,.16);
+      box-shadow: 0 20px 60px rgba(0,0,0,.25), inset 0 0 0 1px rgba(255,255,255,.25);
+      transition: transform .15s ease, opacity .2s ease;
+      user-select: none;
+    }
+    a#hello:hover { transform: translateY(-3px) scale(1.02); }
+    a#hello:active { transform: translateY(0) scale(.98); }
+    a#hello:focus { outline: 4px solid rgba(255,255,255,.5); outline-offset: 6px; }
+
+    /* 新场景样式 */
+    #secret {
+      display:none;
+      text-align:center;
+      color:#fff;
+    }
+    #secret h1{
+      font-size: clamp(32px, 6vw, 64px);
+      margin-bottom:20px;
+    }
+    #forest{
+      width:100%;
+      max-width:800px;
+      border-radius:16px;
+      box-shadow:0 20px 50px rgba(0,0,0,.5);
+    }
+  </style>
+</head>
+<body>
+  <a id="hello" href="#" aria-label="点击切换问候">hello</a>
+  <div id="secret">
+    <h1>Congratulations! You found this place 🌲</h1>
+    <img id="forest" src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1600&auto=format&fit=crop" alt="forest"/>
+  </div>
+
+  <script>
+    const el = document.getElementById('hello');
+    const secret = document.getElementById('secret');
+    const texts = ['hello', 'nice to see you :)', '👋 hello'];
+    let i = 0;
+    let clicks = 0;
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      clicks++;
+      if(clicks < 8){
+        i = (i + 1) % texts.length;
+        el.textContent = texts[i];
+      } else {
+        el.style.display = 'none';
+        document.body.style.background = '#000';
+        secret.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>
